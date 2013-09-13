@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rational", "Rational\Rational.vcxproj", "{58A60F2F-7306-491D-B1ED-D1E41D78E641}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RationalTest", "RationalTest\RationalTest.vcxproj", "{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58A60F2F-7306-491D-B1ED-D1E41D78E641}.Debug|Win32.ActiveCfg = Debug|Win32
+		{58A60F2F-7306-491D-B1ED-D1E41D78E641}.Debug|Win32.Build.0 = Debug|Win32
+		{58A60F2F-7306-491D-B1ED-D1E41D78E641}.Release|Win32.ActiveCfg = Release|Win32
+		{58A60F2F-7306-491D-B1ED-D1E41D78E641}.Release|Win32.Build.0 = Release|Win32
+		{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}.Debug|Win32.Build.0 = Debug|Win32
+		{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}.Release|Win32.ActiveCfg = Release|Win32
+		{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
