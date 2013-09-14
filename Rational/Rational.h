@@ -18,7 +18,6 @@ class Rational {
   friend bool operator> <T>(const Rational<T>&, const Rational<T>&);
   friend bool operator<= <T>(const Rational<T>&, const Rational<T>&);
   friend bool operator>= <T>(const Rational<T>&, const Rational<T>&);
-  friend ostream& operator<< <T>(ostream&, const Rational<T>&);
   friend istream& operator>> <T>(istream&, Rational<T>&);
   friend Rational<T> operator- <T>(const Rational<T>&);
 
@@ -208,7 +207,7 @@ bool operator>=(const Rational<T>& left, const Rational<T>& right) {
 
 template <typename T>
 ostream& operator<<(ostream& os, const Rational<T>& r) {
-  return os << r.numerator << "/" << r.denominator;
+  return os << r.GetNumerator() << "/" << r.GetDenominator();
 }
 
 template <typename T>
