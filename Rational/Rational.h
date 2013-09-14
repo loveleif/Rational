@@ -6,8 +6,9 @@ using namespace std;
 
 /*
  * Class representation of a rational number. This rational number will always 
- * be simplified as far as possible and will always indicate sign on the
- * numerator. For example 2/-8 will be represented as -1/4.
+ * be simplified as far as possible, will always indicate sign on the numerator
+ * and will always represent 0 as 0/1. For example 2/-8 will be represented as 
+ * -1/4 and 0/-128 will be represented as 0/1.
  */
 template <typename T>
 class Rational {
@@ -58,23 +59,27 @@ public:
     return Set(right.denominator * numerator, right.numerator * denominator);
   }
   
+  /* Postfix increment */
   Rational operator++() { 
     Rational<T> rval(*this);
     Set(numerator + denominator, denominator);
     return rval;
   }
-  Rational& operator++(int a) { return Set(numerator + denominator, denominator); }
+  /* Postfix decrement */
   Rational operator--() { 
     Rational<T> rval(*this);
     Set(numerator - denominator, denominator); 
     return rval;
   }
+  /* Prefix increment */
+  Rational& operator++(int a) { return Set(numerator + denominator, denominator); }
+  /* Prefix decrement */
   Rational& operator--(int a) { return Set(numerator - denominator, denominator); }
 
   T GetNumerator() const { return numerator; }
   T GetDenominator() const { return denominator; }
 
-  /* Arithmetic and relational operators are overloaded as non-members. */
+  /* Note: Arithmetic and relational operators are overloaded as non-members. */
 
   explicit operator int() const { return numerator / denominator; }
 };
@@ -95,6 +100,7 @@ T Gcd(T numerator, T denominator) {
 
 template <typename T>
 void Rational<T>::Simplify() {
+  // Always represent 0 as 0/1
   if (numerator == 0) {
     denominator = 1;
     return;
