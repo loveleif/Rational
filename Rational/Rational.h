@@ -161,16 +161,31 @@ operator+(const U& left, const Rational<T>& right) {
 }
 
 template <typename T>
-Rational<T> operator-(const Rational<T>& left, const Rational<T>& right) {
-  Rational<T> sum = left;
-  return sum -= right;
-}
-
-template <typename T>
 Rational<T> operator-(const Rational<T>& in) {
   Rational<T> out = in;
   out.numerator = -out.numerator;
   return out;
+}
+
+template <typename T, typename U>
+Rational<typename IntTraits::LargestType<T, U>::Type>
+operator-(const Rational<T>& left, const Rational<U>& right) {
+  Rational<typename IntTraits::LargestType<T, U>::Type> sum = left;
+  sum -= right;
+  return sum;
+}
+
+template <typename T, typename U>
+Rational<typename IntTraits::LargestType<T, U>::Type>
+operator-(const Rational<T>& left, const U& right) {
+  Rational<IntTraits::LargestType<T, U>::Type> sum = left;
+  return sum -= right;
+}
+
+template <typename T, typename U>
+Rational<typename IntTraits::LargestType<T, U>::Type>
+operator-(const U& left, const Rational<T>& right) {
+  return right - left;
 }
 
 template <typename T>
