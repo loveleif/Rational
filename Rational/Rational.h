@@ -185,7 +185,7 @@ operator-(const Rational<T>& left, const U& right) {
 template <typename T, typename U>
 Rational<typename IntTraits::LargestType<T, U>::Type>
 operator-(const U& left, const Rational<T>& right) {
-  return right - left;
+  return (-right) + left;
 }
 
 template <typename T>
