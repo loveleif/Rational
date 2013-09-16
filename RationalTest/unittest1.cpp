@@ -59,15 +59,15 @@ namespace RationalTest
       Assert::IsTrue(r1-r2==Rational<int>(3, 8));
       Assert::IsTrue((r1 -= r2) == Rational<int>(3, 8));
       r1 = Rational<int>(2,4);
-      Assert::IsTrue((r1 - (Rational<int>) int1) == Rational<int>(-3, 2));
-      Assert::IsTrue((int1 - r1) == Rational<int>(3, 2));
+      Assert::IsTrue((r1 - (Rational<int>) int1) == Rational<int>(-5, 2));
+      Assert::IsTrue((int1 - r1) == Rational<int>(5, 2));
       Rational<short> r3 = Rational<short>(8,16);
       Assert::IsTrue((r3 - r1) == Rational<int>(0, 1));
 
       Rational<short> r_sh_1small = Rational<short>(1, SHRT_MAX);
-      Assert::IsTrue(r_sh_1small - r_sh_1small == Rational<int>(0, 1));
+      Assert::IsTrue(r_sh_1small - r_sh_1small == Rational<short>(0, 1));
       r_sh_1small -= r_sh_1small;
-      Assert::IsTrue(r_sh_1small == Rational<int>(0, 1));
+      Assert::IsTrue(r_sh_1small == Rational<short>(0, 1));
 		}
 
     TEST_METHOD(G)
