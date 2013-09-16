@@ -1,11 +1,12 @@
 #pragma once
 #include <limits>
 using namespace std;
-//#include <climits>
+#include <climits>
 
 namespace IntTraits {
 
 /* NextType trait, used to get a larger int type */
+// TODO: Handle unsigned and check if type really is larger.
 template <typename intT>
 struct NextType {
   typedef intT Type;

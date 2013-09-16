@@ -3,6 +3,7 @@
 #include "Rational.h"
 #include <typeinfo>
 #include <sstream>
+#include <limits.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -42,6 +43,12 @@ namespace RationalTest
       Assert::IsTrue((int1 + r1) == Rational<int>(14, 4));
       Rational<short> r3 = Rational<short>(8,16);
       Assert::IsTrue((r3 + r1) == Rational<int>(1, 1));
+
+      Rational<short> r_sh_1small = Rational<short>(1, SHRT_MAX);
+      Rational<short> r_sh_2small = Rational<short>(2, SHRT_MAX);
+      Assert::IsTrue(r_sh_1small + r_sh_1small == r_sh_2small);
+      r_sh_1small += r_sh_1small;
+      Assert::IsTrue(r_sh_1small == r_sh_2small);
 		}
 
     TEST_METHOD(Subtract)

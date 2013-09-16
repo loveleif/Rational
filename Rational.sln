@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rational", "Rational\Ration
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RationalTest", "RationalTest\RationalTest.vcxproj", "{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.vcxproj", "{5637F73C-D63F-47F8-99A4-E65B57C8C824}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}.Debug|Win32.Build.0 = Debug|Win32
 		{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}.Release|Win32.ActiveCfg = Release|Win32
 		{4D4D6EA5-14F5-45E1-9313-E7341A809B5A}.Release|Win32.Build.0 = Release|Win32
+		{5637F73C-D63F-47F8-99A4-E65B57C8C824}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5637F73C-D63F-47F8-99A4-E65B57C8C824}.Debug|Win32.Build.0 = Debug|Win32
+		{5637F73C-D63F-47F8-99A4-E65B57C8C824}.Release|Win32.ActiveCfg = Release|Win32
+		{5637F73C-D63F-47F8-99A4-E65B57C8C824}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
