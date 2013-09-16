@@ -56,17 +56,17 @@ public:
     Rational<NextType> calc = Rational<NextType>(
       right.denominator * numerator - denominator * right.numerator,
       denominator * right.denominator);
-    return Set(calc.GetNumerator, calc.GetDenominator());
+    return Set(calc.GetNumerator(), calc.GetDenominator());
   }
   Rational& operator*=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       numerator * right.numerator, denominator * right.denominator);
-    return Set(calc.GetNumerator, calc.GetDenominator());
+    return Set(calc.GetNumerator(), calc.GetDenominator());
   }
   Rational& operator/=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       right.denominator * numerator, right.numerator * denominator);
-    return Set(calc.GetNumerator, calc.GetDenominator());
+    return Set(calc.GetNumerator(), calc.GetDenominator());
   }
   
   /* Postfix increment */
