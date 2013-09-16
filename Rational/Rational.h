@@ -68,7 +68,9 @@ public:
       right.denominator * numerator, right.numerator * denominator);
     return Set(calc.GetNumerator(), calc.GetDenominator());
   }
-  
+
+  /* Note: Arithmetic and relational operators are overloaded as non-members. */
+
   /* Postfix increment */
   Rational operator++() { 
     Rational<T> rval(*this);
@@ -88,8 +90,6 @@ public:
 
   T GetNumerator() const { return numerator; }
   T GetDenominator() const { return denominator; }
-
-  /* Note: Arithmetic and relational operators are overloaded as non-members. */
 
   explicit operator int() const { return numerator / denominator; }
 };
