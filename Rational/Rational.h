@@ -72,21 +72,21 @@ public:
   /* Note: Arithmetic and relational operators are overloaded as non-members. */
 
   /* Postfix increment */
-  Rational operator++() { 
+  Rational operator++(int a) { 
     Rational<T> rval(*this);
     Set(numerator + denominator, denominator);
     return rval;
   }
   /* Postfix decrement */
-  Rational operator--() { 
+  Rational operator--(int a) { 
     Rational<T> rval(*this);
     Set(numerator - denominator, denominator); 
     return rval;
   }
   /* Prefix increment */
-  Rational& operator++(int a) { return Set(numerator + denominator, denominator); }
+  Rational& operator++() { return Set(numerator + denominator, denominator); }
   /* Prefix decrement */
-  Rational& operator--(int a) { return Set(numerator - denominator, denominator); }
+  Rational& operator--() { return Set(numerator - denominator, denominator); }
 
   T GetNumerator() const { return numerator; }
   T GetDenominator() const { return denominator; }

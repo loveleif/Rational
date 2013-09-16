@@ -98,6 +98,23 @@ namespace RationalTest
       Assert::IsTrue((r3 / r1) == Rational<int>(1, 1));
 		}
 
+    TEST_METHOD(IncrDecr)
+    {
+      Rational<int> r1 = Rational<int>(1,2);
+      ++r1;
+      Assert::IsTrue(r1 == Rational<int>(3,2));
+      --r1;
+      Assert::IsTrue(r1 == Rational<int>(1,2));
+      --r1;
+      Assert::IsTrue(r1 == Rational<int>(-1,2));
+
+      Rational<int> r2 = r1++;
+      Rational<int> r3 = r1++;
+      Assert::IsTrue(r1 == Rational<int>(3,2));
+      Assert::IsTrue(r2 == Rational<int>(-1,2));
+      Assert::IsTrue(r3 == Rational<int>(1,2));
+    }
+
     TEST_METHOD(G)
 		{
       // short, int, long long som parameter (Rational<short> etc.)

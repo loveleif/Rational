@@ -1,7 +1,6 @@
 #pragma once
 #include <limits>
 using namespace std;
-#include <climits>
 
 namespace IntTraits {
 
