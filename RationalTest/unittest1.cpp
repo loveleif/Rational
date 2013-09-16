@@ -81,12 +81,21 @@ namespace RationalTest
       Assert::IsTrue((r1 * (Rational<int>) int1) == Rational<int>(6, 4));
       Assert::IsTrue((int1 * r1) == Rational<int>(6, 4));
       Rational<short> r3 = Rational<short>(8,16);
-      Assert::IsTrue((r3 - r1) == Rational<int>(0, 1));
+      Assert::IsTrue((r3 * r1) == Rational<int>(16, 64));
+		}
 
-      Rational<short> r_sh_1small = Rational<short>(1, SHRT_MAX);
-      Assert::IsTrue(r_sh_1small - r_sh_1small == Rational<short>(0, 1));
-      r_sh_1small -= r_sh_1small;
-      Assert::IsTrue(r_sh_1small == Rational<short>(0, 1));
+    TEST_METHOD(Divide)
+		{
+			Rational<int> r1 = Rational<int>(2,4), r2 = Rational<int>(2,16);
+      int int1 = 3;
+      Assert::IsTrue(r1/r2==Rational<int>(1,1)/(r2/r1));
+      Assert::IsTrue(r1/r2==Rational<int>(16*2, 8));
+      Assert::IsTrue((r1 /= r2) == Rational<int>(16*2, 8));
+      r1 = Rational<int>(2,4);
+      Assert::IsTrue((r1 / (Rational<int>) int1) == Rational<int>(2, 12));
+      Assert::IsTrue((int1 / r1) == Rational<int>(6, 1));
+      Rational<short> r3 = Rational<short>(8,16);
+      Assert::IsTrue((r3 / r1) == Rational<int>(1, 1));
 		}
 
     TEST_METHOD(G)

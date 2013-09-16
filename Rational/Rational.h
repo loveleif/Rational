@@ -208,9 +208,24 @@ operator*(const U& left, const Rational<T>& right) {
   return right * left;
 }
 
-template <typename T>
-Rational<T> operator/(const Rational<T>& left, const Rational<T>& right) {
-  Rational<T> quotient = left;
+template <typename T, typename U>
+Rational<typename IntTraits::LargestType<T, U>::Type>
+operator/(const Rational<T>& left, const Rational<U>& right) {
+  Rational<IntTraits::LargestType<T, U>::Type> quotient = left;
+  return quotient /= right;
+}
+
+template <typename T, typename U>
+Rational<typename IntTraits::LargestType<T, U>::Type>
+operator/(const Rational<T>& left, const U& right) {
+  Rational<IntTraits::LargestType<T, U>::Type> quotient = left;
+  return quotient /= right;
+}
+
+template <typename T, typename U>
+Rational<typename IntTraits::LargestType<T, U>::Type>
+operator/(const U& left, const Rational<T>& right) {
+  Rational<IntTraits::LargestType<T, U>::Type> quotient = left;
   return quotient /= right;
 }
 
