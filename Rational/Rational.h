@@ -13,6 +13,8 @@ using namespace std;
  */
 template <typename T>
 class Rational {
+  /* Defines NextType as a bigger integer type than T or as T if no bigger type
+     was found */
   typedef typename IntTraits::NextType<T>::Type NextType;
 
   /* Trying to be nice to our friends: */
