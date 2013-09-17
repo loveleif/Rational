@@ -8,19 +8,19 @@ For example 2/-8 will be represented as -1/4 and 0/-128 will be represented as
 0/1.
 
 Some crude unit tests based on Visual Studios C++ unit test framework are 
-supplied in the folder `RationalTest`.
+supplied in the folder RationalTest.
 
 Features:
 
 - Construction and assignment from any integer type or `Rational<IntType>` type. 
-- +=, +-, +* and +/ operators
+- `+=`, `-=`, `*=`, `/=`, `+`, `-`, `*`, `/` operators
 - `int + Rational<IntType>` will work as expected
 - Unary operator, `r1 = -r2;`
-- Postfix and prefix ++ and -- operators
+- Postfix and prefix `++` and `--` operators
 - Explicit conversion to integer types
-- Overloading of << and >>
+- Overloading of `<<` and `>>`
 - Calculations are performed in a larger type than that of the Rational in use 
-  (see `IntTraits.h`). For example, the operation `Rational<short> + 
+  (see IntTraits.h). For example, the operation `Rational<short> + 
   Rational<short>` will perform calculation steps with ints.
 
 Build
