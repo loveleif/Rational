@@ -13,13 +13,12 @@ supplied in the folder RationalTest.
 Features:
 
 - Construction and assignment from any integer type or `Rational<IntType>` type. 
-- `+=`, `-=`, `*=`, `/=`, `+`, `-`, `*`, `/`, `==`, `!=`, `<`, `>`, `<=`, `>=` 
-  operators
+- `+=`, `-=`, `*=`, `/=`, `+`, `-`, `*`, `/`, `==`, `!=`, `<`, `>`, `<=`, `>=`, 
+  `<<`, `>>` operators
+- Postfix and prefix `++` and `--` operators
 - `int + Rational<IntType>` will work as expected
 - Unary operator, `r1 = -r2;`
-- Postfix and prefix `++` and `--` operators
 - Explicit conversion to integer types
-- Overloading of `<<` and `>>`
 - Calculations are performed in a larger type than that of the Rational in use 
   (see IntTraits.h). For example, the operation `Rational<short> + 
   Rational<short>` will perform calculation steps with ints.
