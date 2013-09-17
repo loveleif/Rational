@@ -8,7 +8,8 @@ using namespace std;
  * Class representation of a rational number. This rational number will always 
  * be simplified as far as possible, will always indicate sign on the numerator
  * and will always represent 0 as 0/1. For example 2/-8 will be represented as 
- * -1/4 and 0/-128 will be represented as 0/1.
+ * -1/4 and 0/-128 will be represented as 0/1. Calculations are performed in
+ * a larger type (see IntTraits.h).
  */
 template <typename T>
 class Rational {
