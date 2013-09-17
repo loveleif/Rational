@@ -13,7 +13,8 @@ supplied in the folder RationalTest.
 Features:
 
 - Construction and assignment from any integer type or `Rational<IntType>` type. 
-- `+=`, `-=`, `*=`, `/=`, `+`, `-`, `*`, `/` operators
+- `+=`, `-=`, `*=`, `/=`, `+`, `-`, `*`, `/`, `==`, `!=`, `<`, `>`, `<=`, `>=` 
+  operators
 - `int + Rational<IntType>` will work as expected
 - Unary operator, `r1 = -r2;`
 - Postfix and prefix `++` and `--` operators
