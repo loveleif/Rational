@@ -24,7 +24,6 @@ class Rational {
   friend bool operator> <T>(const Rational<T>&, const Rational<T>&);
   friend bool operator<= <T>(const Rational<T>&, const Rational<T>&);
   friend bool operator>= <T>(const Rational<T>&, const Rational<T>&);
-  friend istream& operator>> <T>(istream&, Rational<T>&);
   friend Rational<T> operator- <T>(const Rational<T>&);
 
 private:
@@ -275,10 +274,13 @@ ostream& operator<<(ostream& os, const Rational<T>& r) {
 
 template <typename T>
 istream& operator>>(istream& is, Rational<T>& item) {
-  is >> item.numerator;
+  T numerator, denominator;
+  is >> numerator;
   is.ignore(1);
-  is >> item.denominator;
-	
+  is >> denominator;
+
+  item.Set(numerator, denominator);
+
   if (!is)
     item = Rational<T>(); // Input failed: give the object the default state
 	
