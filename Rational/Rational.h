@@ -120,8 +120,8 @@ void Rational<T>::Simplify() {
 
   // Divide by greatest common divisor
   T gcd = Gcd(numerator, denominator);
-  numerator = numerator / gcd;
-  denominator = denominator / gcd;
+  numerator /= gcd;
+  denominator /= gcd;
 
   // Indicate sign on numerator only
   if (denominator < 0) {
