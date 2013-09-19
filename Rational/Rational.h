@@ -38,31 +38,32 @@ public:
   Rational(const Rational<U>& r): 
     numerator(r.Numerator()), denominator(r.Denominator()) { }
 
-  /* Sets the numerator and denominator of this Rational, will run Simplify. */
-  Rational& Set(T numerator, T denominator);
+  /* Sets the numerator and denominator of this Rational, will run Simplify if
+   * simplify is true. */
+  Rational& Set(T numerator, T denominator, bool simplify = true);
 
   /* Overloaded compound-assignment operators */
   Rational& operator+=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       right.denominator * numerator + denominator * right.numerator,
       denominator * right.denominator);
-    return Set(calc.Numerator(), calc.Denominator());
+    return Set(calc.Numerator(), calc.Denominator(), false);
   }
   Rational& operator-=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       right.denominator * numerator - denominator * right.numerator,
       denominator * right.denominator);
-    return Set(calc.Numerator(), calc.Denominator());
+    return Set(calc.Numerator(), calc.Denominator(), false);
   }
   Rational& operator*=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       numerator * right.numerator, denominator * right.denominator);
-    return Set(calc.Numerator(), calc.Denominator());
+    return Set(calc.Numerator(), calc.Denominator(), false);
   }
   Rational& operator/=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       right.denominator * numerator, right.numerator * denominator);
-    return Set(calc.Numerator(), calc.Denominator());
+    return Set(calc.Numerator(), calc.Denominator(), false);
   }
 
   /* Note: Arithmetic and relational operators are overloaded as non-members. */
@@ -88,6 +89,7 @@ public:
   T Denominator() const { return denominator; }
 
   explicit operator int() const { return numerator / denominator; }
+  explicit operator double() const { return ((double) numerator) / denominator; }
 };
 
 /*
@@ -125,10 +127,10 @@ void Rational<T>::Simplify() {
 }
 
 template <typename T>
-Rational<T>& Rational<T>::Set(T numerator, T denominator) {
+Rational<T>& Rational<T>::Set(T numerator, T denominator, bool simplify = true) {
   this->numerator = numerator;
   this->denominator = denominator;
-  Simplify();
+  if (simplify) Simplify();
   return *this;
 }
 
