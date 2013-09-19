@@ -149,6 +149,36 @@ namespace RationalTest
       a = a + ll;
       a = ll + a;
 
+      a == in;
+      a == sh;
+      in == a;
+      sh == a;
+
+      a != in;
+      a != sh;
+      in != a;
+      sh != a;
+
+      a < in;
+      a < sh;
+      in < a;
+      sh < a;
+
+      a <= in;
+      a <= sh;
+      in <= a;
+      sh <= a;
+
+      a > in;
+      a > sh;
+      in > a;
+      sh > a;
+
+      a >= in;
+      a >= sh;
+      in >= a;
+      sh >= a;
+
       a = -a2;
 
       a++;

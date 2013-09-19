@@ -18,12 +18,6 @@ class Rational {
   typedef typename IntTraits::NextType<T>::Type NextType;
 
   /* Trying to be nice to our friends: */
-  friend bool operator== <T>(const Rational<T>&, const Rational<T>&);
-  friend bool operator!= <T>(const Rational<T>&, const Rational<T>&);
-  friend bool operator< <T>(const Rational<T>&, const Rational<T>&);
-  friend bool operator> <T>(const Rational<T>&, const Rational<T>&);
-  friend bool operator<= <T>(const Rational<T>&, const Rational<T>&);
-  friend bool operator>= <T>(const Rational<T>&, const Rational<T>&);
   friend Rational<T> operator- <T>(const Rational<T>&);
 
 private:
@@ -42,7 +36,7 @@ public:
 
   template <typename U>
   Rational(const Rational<U>& r): 
-    numerator(r.GetNumerator()), denominator(r.GetDenominator()) { }
+    numerator(r.Numerator()), denominator(r.Denominator()) { }
 
   /* Sets the numerator and denominator of this Rational, will run Simplify. */
   Rational& Set(T numerator, T denominator);
@@ -52,23 +46,23 @@ public:
     Rational<NextType> calc = Rational<NextType>(
       right.denominator * numerator + denominator * right.numerator,
       denominator * right.denominator);
-    return Set(calc.GetNumerator(), calc.GetDenominator());
+    return Set(calc.Numerator(), calc.Denominator());
   }
   Rational& operator-=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       right.denominator * numerator - denominator * right.numerator,
       denominator * right.denominator);
-    return Set(calc.GetNumerator(), calc.GetDenominator());
+    return Set(calc.Numerator(), calc.Denominator());
   }
   Rational& operator*=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       numerator * right.numerator, denominator * right.denominator);
-    return Set(calc.GetNumerator(), calc.GetDenominator());
+    return Set(calc.Numerator(), calc.Denominator());
   }
   Rational& operator/=(const Rational& right) {
     Rational<NextType> calc = Rational<NextType>(
       right.denominator * numerator, right.numerator * denominator);
-    return Set(calc.GetNumerator(), calc.GetDenominator());
+    return Set(calc.Numerator(), calc.Denominator());
   }
 
   /* Note: Arithmetic and relational operators are overloaded as non-members. */
@@ -90,8 +84,8 @@ public:
   /* Prefix decrement */
   Rational& operator--() { return Set(numerator - denominator, denominator); }
 
-  T GetNumerator() const { return numerator; }
-  T GetDenominator() const { return denominator; }
+  T Numerator() const { return numerator; }
+  T Denominator() const { return denominator; }
 
   explicit operator int() const { return numerator / denominator; }
 };
@@ -141,6 +135,8 @@ Rational<T>& Rational<T>::Set(T numerator, T denominator) {
 // Overloaded arithmetic operators
 // ===============================
 
+// +
+
 template <typename T, typename U>
 Rational<typename IntTraits::LargestType<T, U>::Type>
 operator+(const Rational<T>& left, const Rational<U>& right) {
@@ -161,6 +157,8 @@ Rational<typename IntTraits::LargestType<T, U>::Type>
 operator+(const U& left, const Rational<T>& right) {
   return right + left;
 }
+
+// -
 
 template <typename T>
 Rational<T> operator-(const Rational<T>& in) {
@@ -190,6 +188,8 @@ operator-(const U& left, const Rational<T>& right) {
   return (-right) + left;
 }
 
+// *
+
 template <typename T, typename U>
 Rational<typename IntTraits::LargestType<T, U>::Type>
 operator*(const Rational<T>& left, const Rational<U>& right) {
@@ -209,6 +209,8 @@ Rational<typename IntTraits::LargestType<T, U>::Type>
 operator*(const U& left, const Rational<T>& right) {
   return right * left;
 }
+
+// /
 
 template <typename T, typename U>
 Rational<typename IntTraits::LargestType<T, U>::Type>
@@ -234,42 +236,115 @@ operator/(const U& left, const Rational<T>& right) {
 // Overloaded relational operators
 // ===============================
 
-template <typename T>
-bool operator==(const Rational<T>& left, const Rational<T>& right) {
-  return left.numerator == right.numerator && left.denominator == right.denominator;
+// ==
+
+template <typename T, typename U>
+bool operator==(const Rational<T>& left, const Rational<U>& right) {
+  return left.Numerator() == right.Numerator() && left.Denominator() == right.Denominator();
 }
 
-template <typename T>
-bool operator!=(const Rational<T>& left, const Rational<T>& right) {
-  return left.numerator != right.numerator || left.denominator != right.denominator;
+template <typename T, typename U>
+bool operator==(const Rational<T>& left, const U& right) {
+  return left.Denominator() == 1 && left.Numerator() == right;
 }
 
-template <typename T>
-bool operator<(const Rational<T>& left, const Rational<T>& right) {
-  return (right - left).numerator > 0;
+template <typename T, typename U>
+bool operator==(const U& left, const Rational<T>& right) {
+  return right == left;
 }
 
-template <typename T>
-bool operator>(const Rational<T>& left, const Rational<T>& right) {
-  return (left - right).numerator > 0;
+// !=
+
+template <typename T, typename U>
+bool operator!=(const Rational<T>& left, const Rational<U>& right) {
+  return !(left == right);
 }
 
-template <typename T>
-bool operator<=(const Rational<T>& left, const Rational<T>& right) {
-  return (right - left).numerator >= 0;
+template <typename T, typename U>
+bool operator!=(const Rational<T>& left, const U& right) {
+  return !(left == right);
 }
 
-template <typename T>
-bool operator>=(const Rational<T>& left, const Rational<T>& right) {
-  return (left - right).numerator >= 0;
+template <typename T, typename U>
+bool operator!=(const T& left, const Rational<U>& right) {
+  return !(right == left);
 }
+
+// <
+
+template <typename T, typename U>
+bool operator<(const Rational<T>& left, const Rational<U>& right) {
+  return (right - left).Numerator() > 0;
+}
+
+template <typename T, typename U>
+bool operator<(const Rational<T>& left, const U& right) {
+  return left < Rational<U>(right);
+}
+
+template <typename T, typename U>
+bool operator<(const T& left, const Rational<U>& right) {
+  return Rational<T>(left) < right;
+}
+
+// >
+
+template <typename T, typename U>
+bool operator>(const Rational<T>& left, const Rational<U>& right) {
+  return (left - right).Numerator() > 0;
+}
+
+template <typename T, typename U>
+bool operator>(const Rational<T>& left, const U& right) {
+  return left > Rational<U>(right);
+}
+
+template <typename T, typename U>
+bool operator>(const T& left, const Rational<U>& right) {
+  return Rational<T>(left) > right;
+}
+
+// <=
+
+template <typename T, typename U>
+bool operator<=(const Rational<T>& left, const Rational<U>& right) {
+  return !(left > right);
+}
+
+template <typename T, typename U>
+bool operator<=(const Rational<T>& left, const U& right) {
+  return left <= Rational<U>(right);
+}
+
+template <typename T, typename U>
+bool operator<=(const T& left, const Rational<U>& right) {
+  return Rational<T>(left) <= right;
+}
+
+// >=
+
+template <typename T, typename U>
+bool operator>=(const Rational<T>& left, const Rational<U>& right) {
+  return !(left < right);
+}
+
+template <typename T, typename U>
+bool operator>=(const Rational<T>& left, const U& right) {
+  return left >= Rational<U>(right);
+}
+
+template <typename T, typename U>
+bool operator>=(const T& left, const Rational<U>& right) {
+  return Rational<T>(left) >= right;
+}
+
 
 // Overloaded stream operator
 // ==========================
 
 template <typename T>
 ostream& operator<<(ostream& os, const Rational<T>& r) {
-  return os << r.GetNumerator() << "/" << r.GetDenominator();
+  return os << r.Numerator() << "/" << r.Denominator();
 }
 
 template <typename T>
