@@ -8,7 +8,11 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace RationalTest
-{		
+{	
+  typedef Rational<short> Rshort;
+  typedef Rational<int> Rint;
+  typedef Rational<long long> RLL;
+
 	TEST_CLASS(UnitTest1)
 	{
 	public:
@@ -117,106 +121,65 @@ namespace RationalTest
 
     TEST_METHOD(G)
 		{
-      // short, int, long long som parameter (Rational<short> etc.)
-      short sh = 42;
-      int in = 123;
-      long long ll = 7000000000;
-      Rational<short> Rsh = Rational<short>(3,13);
-      Rational<int> Rin = Rational<int>(3,139);
-      Rational<long long> Rll = Rational<long long>(8000001, 7000000000);
+    Rational<short> rs0, rs1(1), rs2(2,1), rs3(3);
+	  Rational<int> ri0;
+	  Rational<long long> rll0, rll1(1), rll2(2,1), rll3(3);
 
-      Rational<int> a, a2;
-      a = Rational<int>(sh);
-      a = Rational<int>(in);
-      #pragma warning(disable: 4244)
-      a = Rational<int>(ll);
-      a = Rational<int>(Rsh);
-      a = Rational<int>(Rin);
-      a = Rational<int>(Rll);
 
-      a = in;
-      a = sh;
-      a = ll;
+    //Konstrueras från ”Tal” dvs. Rtal rtal(tal);
+	  RLL   rllx(1);
+	  RLL   rlly(rs0);
 
-      a += in;
-      a += sh;
-      a += ll;
+    //Jämföras med == dvs. if (rtal == tal) …
+	  Assert::IsTrue(rs1==rs1);
+	  Assert::IsTrue(rs2==2);
+	  Assert::IsTrue(rs1==rll1);
 
-      a = a + in;
-      a = in + a;
-      a = a + sh;
-      a = sh + a;
-      a = a + ll;
-      a = ll + a;
+    //Tilldelas (=) från ”Tal” dvs. rtal=tal;
+	  rs3=Rint(13,3);
+	  Assert::IsTrue(rs3==Rshort(13,3));
+	  rs3=rll3=-17;
+	  Assert::IsTrue(rs3==Rshort(-17));
 
-      a == in;
-      a == sh;
-      in == a;
-      sh == a;
+    //+= med ”Tal” dvs. rtal += tal;
+	  Assert::IsTrue((rs3 += 4) == Rshort(-13));
 
-      a != in;
-      a != sh;
-      in != a;
-      sh != a;
+    //+  dvs. (rtal + tal)
+	  rs3=Rshort(13,3);
+	  Assert::IsTrue(rs3+rll2==Rshort(19,3));
+	  Assert::IsTrue(rs3+2==Rshort(19,3));
 
-      a < in;
-      a < sh;
-      in < a;
-      sh < a;
+    //unärt ”–” dvs. rtal1 = -rtal2;
+	  Assert::IsTrue( (rs0=-rs1)==Rshort(-1));
 
-      a <= in;
-      a <= sh;
-      in <= a;
-      sh <= a;
+    //båda ++ operatorerna, dvs. ++rtal; rtal++;
+	  rll3 = RLL(1,6);
+	  Assert::IsTrue(++rll3==RLL(7,6));
+	  Assert::IsTrue(rll3++==RLL(7,6));
+	  Assert::IsTrue(rll3==RLL(13,6));
 
-      a > in;
-      a > sh;
-      in > a;
-      sh > a;
+    // explicit konvertering till Tal. (Kräver VS2012 och kompilator CTP november 12.
+	  int i = static_cast<int>(rll3);
+	  Assert::IsTrue(i==2);
 
-      a >= in;
-      a >= sh;
-      in >= a;
-      sh >= a;
-
-      a = -a2;
-
-      a++;
-      a--;
-      ++a;
-      a++;
-
-      stringstream ss;
-      ss << Rin;
-      Rational<int> out;
-      ss >> out;
-      Assert::IsTrue(out == Rin);
-
-      int aa = (int) Rational<short>(4,1);
-      Rational<int> b = Rational<short>(4,9);
-		}
+    // Overloading av << och >> (ut och in matning)
+	  std::cout << "Utmatning>" << rs3 << "< skriv in texten mellan > och < + retur\n";
+	  std::cin >> rs2;
+	  Assert::IsTrue(rs3==rs2);
+	 }
 
     TEST_METHOD(VG)
     {
-      short sh = 42;
-      int in = 123;
-      long long ll = 7000000000;
-      Rational<short> Rsh = Rational<short>(3,13);
-      Rational<int> Rin = Rational<int>(3,139);
-      Rational<long long> Rll = Rational<long long>(8000001, 7000000000);
+	  Rational<short> as0, as1(1), as2(2,1), as3(3);
+	  Rational<long long> all0, all1(1), all2(2,1), all3(3);
+	  Assert::IsTrue(1000000+Rshort(1,2) == Rint(2000001,2));	//blir bara rätt om man man räknar med int
+	  Assert::IsTrue(Rshort(1,2)+1000000 == Rint(2000001,2));	//blir bara rätt om man man räknar med int
+	  Assert::IsTrue(RLL(10000000LL)+Rshort(1,2) == RLL(20000001,2));	//blir bara rätt om man man räknar med int
 
-      Assert::IsTrue(std::is_same<Rational<long long>, decltype((Rll + in))>::value);
-      Assert::IsTrue(std::is_same<Rational<long long>, decltype((in + Rll))>::value);
+	  Assert::IsTrue(Rshort(10000, 81)+Rshort(10000, 81) == Rshort(20000, 81));	//blir bara rätt om man man räknar med int
 
-      Assert::IsTrue(std::is_same<Rational<int>, decltype((Rin + sh))>::value);
-      Assert::IsTrue(std::is_same<Rational<int>, decltype((sh + Rin))>::value);
-
-      Assert::IsTrue(std::is_same<Rational<long long>, decltype((Rin + ll))>::value);
-      Assert::IsTrue(std::is_same<Rational<long long>, decltype((ll + Rin))>::value);
-
-      Assert::IsTrue(std::is_same<Rational<int>, decltype((Rsh + in))>::value);
-      Assert::IsTrue(std::is_same<Rational<int>, decltype((in + Rsh))>::value);
-
+	  Assert::IsTrue((Rshort(1)+(short)SHRT_MAX)==SHRT_MIN);
+	  Assert::IsTrue((Rshort(1)+(int)INT_MAX)==INT_MIN);
     }
     
 	};
