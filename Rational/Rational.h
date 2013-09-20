@@ -43,26 +43,22 @@ public:
 
   /* Overloaded compound-assignment operators */
   Rational& operator+=(const Rational& right) {
-    Rational<NextType> calc = Rational<NextType>(
+    return *this = Rational<NextType>(
       right.denominator * numerator + denominator * right.numerator,
       denominator * right.denominator);
-    return *this = calc;
   }
   Rational& operator-=(const Rational& right) {
-    Rational<NextType> calc = Rational<NextType>(
+    return *this =  Rational<NextType>(
       right.denominator * numerator - denominator * right.numerator,
       denominator * right.denominator);
-    return *this = calc;
   }
   Rational& operator*=(const Rational& right) {
-    Rational<NextType> calc = Rational<NextType>(
+    return *this =  Rational<NextType>(
       numerator * right.numerator, denominator * right.denominator);
-    return *this = calc;
   }
   Rational& operator/=(const Rational& right) {
-    Rational<NextType> calc = Rational<NextType>(
+    return *this = Rational<NextType>(
       right.denominator * numerator, right.numerator * denominator);
-    return *this = calc;
   }
 
   /* Note: Arithmetic and relational operators are overloaded as non-members. */
