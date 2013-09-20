@@ -163,9 +163,11 @@ namespace RationalTest
 	  Assert::IsTrue(i==2);
 
     // Overloading av << och >> (ut och in matning)
-	  std::cout << "Utmatning>" << rs3 << "< skriv in texten mellan > och < + retur\n";
-	  std::cin >> rs2;
-	  Assert::IsTrue(rs3==rs2);
+    stringstream ss;
+    ss << rll3;
+    RLL out;
+    ss >> out;
+    Assert::IsTrue(out == rll3);
 	 }
 
     TEST_METHOD(VG)
