@@ -12,6 +12,9 @@ supplied in the folder RationalTest.
 
 Features:
 
+- Calculations are performed in a larger type than that of the Rational in use 
+  (see IntTraits.h). For example, the operation `Rational<short> + 
+  Rational<short>` will perform calculation steps with ints.
 - Construction and assignment from any integer type or `Rational<IntType>` type. 
 - `+=`, `-=`, `*=`, `/=`, `+`, `-`, `*`, `/`, `==`, `!=`, `<`, `>`, `<=`, `>=`, 
   `<<`, `>>` operators
@@ -19,9 +22,6 @@ Features:
 - `int + Rational<IntType>` will work as expected
 - Unary operator, `r1 = -r2;`
 - Explicit conversion to integer types
-- Calculations are performed in a larger type than that of the Rational in use 
-  (see IntTraits.h). For example, the operation `Rational<short> + 
-  Rational<short>` will perform calculation steps with ints.
 
 Build
 -----
